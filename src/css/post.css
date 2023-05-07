@@ -53,6 +53,7 @@
    cursor: pointer;
     align-items: center;
     margin-right: 20px;
+   
 }
 
 .post__footer .post__footer__option svg{
@@ -62,4 +63,16 @@
 .post__footer .post__footer__option span{
     color: #4e4d4d;
     font-size: 12px;
+}
+
+
+
+.button{
+border-radius: 3px;
+font-size: 5px;
+color: black;
+padding: 8px;
+text-align: center;
+overflow: hidden;
+cursor: pointer;
 }

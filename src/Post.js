@@ -1,14 +1,14 @@
 import React, { forwardRef, useEffect, useState } from 'react'
+
 import { Avatar } from '@mui/material'
-//import InputOption from '../Feed/InputOption';
+
 
 import MoreHorizIcon from '@mui/icons-material/MoreHoriz';
 import "./css/post.css"
 import ThumbUpAltIcon from '@mui/icons-material/ThumbUpAlt';
-import CommentIcon from '@mui/icons-material/Comment';
+//import CommentIcon from '@mui/icons-material/Comment';
 import ShareIcon from '@mui/icons-material/Share';
 import SendIcon from '@mui/icons-material/Send';
-import { VerticalAlignTopOutlined } from '@mui/icons-material';
 //import { useSelector } from 'react-redux';
 //import Button from '@material-ui/core/Button'; 
 //import { useState } from 'react';
@@ -18,8 +18,10 @@ import { VerticalAlignTopOutlined } from '@mui/icons-material';
    // const [liked, setLiked] = useState(false);
 
 const Post = forwardRef(({name, description, message, photoURL} , ref) => {
-  const [like, setLike] = useState(0);
-  useEffect(() => {
+  const [like, setlike] = useState(0);
+  const [likeactive, setlikeactive] = useState(false);
+  
+ /* useEffect(() => {
     const likecount = localStorage.getItem("inc");
 
     if(likecount) {
@@ -30,7 +32,7 @@ const Post = forwardRef(({name, description, message, photoURL} , ref) => {
   useEffect(() => {
     localStorage.setItem("inc", like);
   }, [like]);
-
+*/
 
  const[comments, setComments] = useState([]);
   const[commentVisible, setCommentVisible] = useState(false);
@@ -39,9 +41,16 @@ const Post = forwardRef(({name, description, message, photoURL} , ref) => {
     localStorage.getItem("com");
   });
 
-  const handleLike = () => {
-    //setLike(like + 1);
-    alert("like");
+  //const handleLike = () => {
+    function likef(){
+  if (likeactive){
+    setlikeactive(false)
+    setlike(like-1)
+  } else{
+    setlikeactive(true)
+    setlike(like-1)
+  }
+
     
   };
 
@@ -56,6 +65,18 @@ const Post = forwardRef(({name, description, message, photoURL} , ref) => {
      }
   };
   
+
+
+
+
+
+
+
+
+
+
+
+
   return (
     <div className="posts" ref={ref}>
         <div className="posts__header">
@@ -79,17 +100,14 @@ const Post = forwardRef(({name, description, message, photoURL} , ref) => {
        
        <div className="post__footer">
         <div className="post__footer__option">
-      <ThumbUpAltIcon onClick={handleLike} className = "post__likeButton"/>
-      <span>{localStorage.getItem("likes") || 0 }</span>
-    <span>Like</span>
-       <VerticalAlignTopOutlined fontSize="small"/>
-        </div>
-
-        <div className="post__footer__option">
-        <CommentIcon onClick = {handleComment} className="post__commentButton"/>
-       
-      <span>Comment</span>
+      <ThumbUpAltIcon onClick={likef} className={[likeactive ? 'active-like' : null, 'button'].join('')}/>
+    
+      <span>Like{like}</span>
       </div>
+
+        <div className="post__footer__option" onClick = {handleComment}>
+    
+        </div>
    
         <div className="post__footer__option">
         <ShareIcon/>
